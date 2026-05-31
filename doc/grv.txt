@@ -1,0 +1,744 @@
+*grv.txt*     Gruvbox with Material Palette
+*grv*
+>
+           ______                 __
+          / ____/______  ___   __/ /_  ____  _  __
+         / / __/ ___/ / / / | / / __ \/ __ \| |/_/
+        / /_/ / /  / /_/ /| |/ / /_/ / /_/ />  <
+        \____/_/   \__,_/ |___/_.___/\____/_/|_|
+
+            __  ___      __            _       __
+           /  |/  /___ _/ /____  _____(_)___ _/ /
+          / /|_/ / __ `/ __/ _ \/ ___/ / __ `/ /
+         / /  / / /_/ / /_/  __/ /  / / /_/ / /
+        /_/  /_/\__,_/\__/\___/_/  /_/\__,_/_/
+<
+
+==============================================================================
+CONTENTS                                     *grv-contents*
+
+Introduction                                 |grv-introduction|
+Installation                                 |grv-installation|
+Usage                                        |grv-usage|
+Configuration                                |grv-configuration|
+FAQ                                          |grv-faq|
+
+Note: Type |gO| in neovim to show the outline of contents.
+
+==============================================================================
+INTRODUCTION                                     *grv-introduction*
+
+Gruvbox Material is a modified version of Gruvbox, the contrast is adjusted to
+be softer in order to protect developers' eyes.
+
+There are 3 palettes available in this color scheme:
+
+- `material`: Carefully designed to have a soft contrast.
+- `mix`: Color palette obtained by calculating the mean of the other two.
+- `original`: The color palette used in the original gruvbox.
+
+This color scheme uses the `material` palette by default, you can use
+|g:grv_foreground| to switch to another palette.
+
+Features~
+
+- Carefully designed color palette for eye protection.
+- Switch back to the original color palette whenever you like.
+- Highly customizable.
+- Rich support for common file types and plugins.
+- Tree-sitter support.
+- Semantic highlighting support.
+- Italic support 🎉
+
+==============================================================================
+INSTALLATION                                     *grv-installation*
+
+Note: For better syntax highlighting support, consider installing one of the
+following plugins additionally to this colorscheme:
+
+	https://github.com/sheerun/vim-polyglot
+	https://github.com/nvim-treesitter/nvim-treesitter.
+
+------------------------------------------------------------------------------
+Via a Plugin Manager
+
+VIM-PLUG
+>
+    Plug 'harunnoir/grv'
+<
+Refer to https://github.com/junegunn/vim-plug for further information.
+
+LAZY.NVIM
+
+In Neovim (Lua configuration):
+>
+    {
+      'harunnoir/grv',
+      lazy = false,
+      priority = 1000,
+      config = function()
+        -- Optionally configure and load the colorscheme
+        -- directly inside the plugin declaration.
+        vim.g.grv_enable_italic = true
+        vim.cmd.colorscheme('grv')
+      end
+    }
+<
+Refer to https://github.com/folke/lazy.nvim for further information.
+
+------------------------------------------------------------------------------
+As a Native Vim Package
+
+Users of Vim 8 and greater may leverage Vim's native |packages| system.
+
+1. Create a new directory: `$ mkdir -p ~/.vim/pack/colors/opt`
+
+2. Clone this repository: `$ git clone --depth 1 https://github.com/harunnoir/grv.git ~/.vim/pack/colors/opt/grv`
+
+3. Generate help tags: `:helptags ~/.vim/pack/colors/opt/grv/doc/`
+
+4. Add `packadd! grv` to your vimrc.
+
+Note: If you install this color scheme to `pack/*/start` instead of
+`pack/*/opt`, you still need to add `packadd! grv` to your vimrc,
+as discussed in the following issue:
+https://github.com/harunnoir/grv/issues/60
+
+------------------------------------------------------------------------------
+Manually
+
+Users of Vim 7 and lower may install the colorscheme manually.
+
+1. Clone the repository: `git clone --depth 1 https://github.com/harunnoir/grv.git`
+
+2. Copy `grv/autoload/grv.vim` to `~/.vim/autoload/`.
+
+3. Copy `grv/colors/grv.vim` to `~/.vim/colors/`.
+
+4. Copy `grv/doc/grv.txt` to `~/.vim/doc/` and
+   execute `:helptags ~/.vim/doc/` to generate help tags.
+
+5. To install the airline theme, copy
+   `grv/autoload/airline/themes/grv.vim`
+   to `~/.vim/autoload/airline/themes/`.
+   https://github.com/vim-airline/vim-airline
+
+6. To install the lightline theme,
+   copy `grv/autoload/lightline/colorscheme/grv.vim`
+   to `~/.vim/autoload/lightline/colorscheme/`.
+   https://github.com/itchyny/lightline.vim
+
+7. To install the lualine theme,
+   copy `grv/lua/lualine/themes/grv.lua`
+   to `~/.config/nvim/lua/lualine/themes/`.
+   https://github.com/nvim-lualine/lualine.nvim
+
+------------------------------------------------------------------------------
+AUR
+
+There are some packages available for Arch Linux users in AUR:
+
+	https://aur.archlinux.org/pkgbase/vim-grv-git (Vim)
+	https://aur.archlinux.org/pkgbase/neovim-grv-git (Neovim)
+
+==============================================================================
+USAGE                                                   *grv-usage*
+
+------------------------------------------------------------------------------
+
+Vim~
+
+    Put something like this in your vimrc:
+>
+        " Important!!
+        if has('termguicolors')
+          set termguicolors
+        endif
+
+        " For dark version.
+        set background=dark
+
+        " For light version.
+        set background=light
+
+        " Set contrast.
+        " This configuration option should be placed before `colorscheme grv`.
+        " Available values: 'hard', 'medium'(default), 'soft'
+        let g:grv_background = 'soft'
+
+        " For better performance
+        let g:grv_better_performance = 1
+
+        colorscheme grv
+<
+    See |grv-configuration| for more configuration options.
+
+    If you want to apply this color scheme temporarily, run this command in
+    vim(this may cause broken colors):
+>
+        :colorscheme grv
+<
+------------------------------------------------------------------------------
+
+Airline~
+
+    To enable [airline](https://github.com/vim-airline/vim-airline) color
+    scheme, put this in your vimrc:
+>
+        let g:airline_theme = 'grv'
+<
+    To apply it without reloading:
+>
+        :AirlineTheme grv
+<
+------------------------------------------------------------------------------
+
+Lightline~
+
+    To enable [lightline](https://github.com/itchyny/lightline.vim) color
+    scheme, put this in your vimrc:
+>
+        let g:lightline = {}
+        let g:lightline.colorscheme = 'grv'
+
+        " Or this line:
+        let g:lightline = {'colorscheme' : 'grv'}
+<
+    To apply it without reloading:
+>
+        :let g:lightline.colorscheme = 'grv'
+        :call lightline#init()
+        :call lightline#colorscheme()
+<
+------------------------------------------------------------------------------
+
+Lualine~
+
+    To enable [lualine](https://github.com/nvim-lualine/lualine.nvim) color
+    scheme, put this in your init.lua:
+>
+        require'lualine'.setup {
+          options = {
+            theme = 'grv'
+          }
+        }
+<
+    To apply it without reloading:
+>
+        :lua require'lualine'.setup {options = {theme = 'grv'}}
+<
+==============================================================================
+CONFIGURATION                                   *grv-configuration*
+
+Note: the configuration options should be placed before `colorscheme grv`
+
+E.g.
+>
+    if has('termguicolors')
+      set termguicolors
+    endif
+    set background=light
+
+    let g:grv_background = 'soft'
+    let g:grv_better_performance = 1
+
+    colorscheme grv
+    let g:lightline = {'colorscheme' : 'grv'}
+<
+------------------------------------------------------------------------------
+                                                 *g:grv_background*
+g:grv_background~
+
+The background contrast used in this color scheme.
+
+    Type:               |String|
+    Available values:   `'hard'`, `'medium'`, `'soft'`
+    Default value:      `'medium'`
+
+------------------------------------------------------------------------------
+                                                 *g:grv_foreground*
+g:grv_foreground~
+
+The foreground color palette used in this color scheme.
+
+- `material`: Carefully designed to have a soft contrast.
+- `mix`: Color palette obtained by calculating the mean of the other two.
+- `original`: The color palette used in the original gruvbox.
+
+    Type:               |String|
+    Available values:   `'material'`, `'mix'`, `'original'`
+    Default value:      `'material'`
+
+------------------------------------------------------------------------------
+                                     *g:grv_disable_italic_comment*
+g:grv_disable_italic_comment~
+
+By default, italic is enabled in `Comment`. To disable italic in `Comment`, set
+this option to `1`.
+
+    Type:               |Number|
+    Available values:   `0`, `1`
+    Default value:      `0`
+
+------------------------------------------------------------------------------
+                                                *g:grv_enable_bold*
+g:grv_enable_bold~
+
+To enable bold in function name just like the original gruvbox, set this
+option to `1`.
+
+    Type:               |Number|
+    Available values:   `0`, `1`
+    Default value:      `0`
+
+------------------------------------------------------------------------------
+                                              *g:grv_enable_italic*
+g:grv_enable_italic~
+
+To enable italic in this color scheme, set this option to `1`.
+
+    Type:               |Number|
+    Available values:   `0`, `1`
+    Default value:      `0`
+
+Note: This option is designed to use with fonts that support cursive italics.
+See |grv-faq| for more information.
+
+------------------------------------------------------------------------------
+                                                     *g:grv_cursor*
+g:grv_cursor~
+
+Customize the cursor color.
+
+The value `'auto'` causes the color to change according to the foreground
+color of the character under the cursor.
+
+Requires setting the |guicursor| option as in the examples from the Vim doc for
+the cursor to be styled according to |hl-Cursor|.
+
+Only works in GUI clients and compatible terminal emulators.
+
+    Type:               |String|
+    Available values:   `''`, `'auto'`, `'red'`, `'orange'`, `'yellow'`, `'green'`,
+    `'aqua'`, `'blue'`, `'purple'`
+    Default value:      `''`
+
+------------------------------------------------------------------------------
+                                     *g:grv_transparent_background*
+g:grv_transparent_background~
+
+To use transparent background, set this option to `1`.
+
+If you want more ui components to be transparent (for example, status line
+background), set this option to `2`.
+
+    Type:               |Number|
+    Available values:   `0`, `1`, `2`
+    Default value:      `0`
+
+------------------------------------------------------------------------------
+                                       *g:grv_dim_inactive_windows*
+g:grv_dim_inactive_windows~
+
+Dim inactive windows. Only works in Neovim currently.
+
+When this option is used in conjunction with |g:grv_show_eob| set
+to 0, the end of the buffer will only be hidden inside the active window.
+Inside inactive windows, the end of buffer filler characters will be visible
+in dimmed symbols. This is due to the way Vim and Neovim handle
+|hl-EndOfBuffer|.
+
+    Type:               |Number|
+    Available values:   `0`, `1`
+    Default value:      `0`
+
+------------------------------------------------------------------------------
+                                                     *g:grv_visual*
+g:grv_visual~
+
+Control the |hl-Visual| and the |hl-VisualNOS| highlight group.
+
+    Type:               |String|
+    Available values:   `'grey background'`, `'green background'`,
+    `'blue background'`, `'red background'`, `'reverse'`
+    Default value:      `'grey background'`
+
+------------------------------------------------------------------------------
+                                  *g:grv_menu_selection_background*
+g:grv_menu_selection_background~
+
+Customize the background color of |hl-PmenuSel| and |hl-WildMenu|.
+
+    Type:               |String|
+    Available values:   `'grey'`, `'red'`, `'orange'`, `'yellow'`, `'green'`,
+    `'aqua'`, `'blue'`, `'purple'`
+    Default value:      `'grey'`
+
+------------------------------------------------------------------------------
+                                     *g:grv_sign_column_background*
+g:grv_sign_column_background~
+
+By default, the background color of the sign and fold columns is the same as
+the one of the normal text. `'grey'` turns the background of the sign and fold
+columns grey. `'linenr'` applies an homogeneous grey background across the
+sign, fold and line number columns. The latter is particularly suitable for a
+usage with Neovim's |statuscolumn| option.
+
+    Type:               |String|
+    Available values:   `'none'`, `'grey'`, `'linenr'`
+    Default value:      `'none'`
+
+------------------------------------------------------------------------------
+                                           *g:grv_spell_foreground*
+g:grv_spell_foreground~
+
+By default, this color scheme won't color the foreground of |spell|, instead
+colored under curls will be used. If you also want to color the foreground,
+set this option to `'colored'`.
+
+    Type:               |String|
+    Available values:   `'none'`, `'colored'`
+    Default value:      `'none'`
+
+------------------------------------------------------------------------------
+                                                *g:grv_ui_contrast*
+g:grv_ui_contrast~
+
+The contrast of line numbers, indent lines, etc.
+
+    Type:               |String|
+    Available values:   `'low'`, `'high'`
+    Default value:      `'low'`
+
+------------------------------------------------------------------------------
+                                                   *g:grv_show_eob*
+g:grv_show_eob~
+
+Whether to show |hl-EndOfBuffer|.
+
+    Type:               |Number|
+    Available values:   `1`, `0`
+    Default value:      `1`
+
+------------------------------------------------------------------------------
+                                                *g:grv_float_style*
+g:grv_float_style~
+
+Style used to make Neovim's floating windows stand out from other windows.
+`'bright'` makes the background of these windows lighter than |hl-Normal|,
+whereas `'dim'` makes it darker.
+
+The value `'blend'` causes floating windows to be displayed with the same
+background as normal windows. Only use this style if Neovim is configured with
+a non-empty |'winborder'|, otherwise floating windows will visually blend into
+the main window without any distinctive delimiter. Plugins which create
+floating windows without border by default may also need to be configured
+individually.
+
+Floating windows include for instance diagnostic pop-ups, scrollable
+documentation windows from completion engines, overlay windows from
+installers, etc.
+
+    Type:               |String|
+    Available values:   `'bright'`, `'dim'`, `'blend'`
+    Default value:      `'bright'`
+
+------------------------------------------------------------------------------
+                                  *g:grv_diagnostic_text_highlight*
+g:grv_diagnostic_text_highlight~
+
+Some plugins support highlighting error/warning/info/hint texts, by default
+these texts are only underlined, but you can use this option to also highlight
+the background of them.
+
+    Type:               |Number|
+    Available values:   `0`, `1`
+    Default value:      `0`
+
+Currently, the following plugins are supported:
+
+- neovim's built-in language server client
+- https://github.com/neoclide/coc.nvim
+- https://github.com/prabirshrestha/vim-lsp
+- https://github.com/ycm-core/YouCompleteMe
+- https://github.com/dense-analysis/ale
+- https://github.com/neomake/neomake
+- https://github.com/vim-syntastic/syntastic
+
+------------------------------------------------------------------------------
+                                  *g:grv_diagnostic_line_highlight*
+g:grv_diagnostic_line_highlight~
+
+Some plugins support highlighting error/warning/info/hint lines, but this
+feature is disabled by default in this color scheme. To enable this feature,
+set this option to `1`.
+
+    Type:               |Number|
+    Available values:   `0`, `1`
+    Default value:      `0`
+
+Currently, the following plugins are supported:
+
+- https://github.com/neoclide/coc.nvim
+- https://github.com/ycm-core/YouCompleteMe
+- https://github.com/dense-analysis/ale
+- https://github.com/vim-syntastic/syntastic
+
+------------------------------------------------------------------------------
+                                    *g:grv_diagnostic_virtual_text*
+g:grv_diagnostic_virtual_text~
+
+Some plugins can use the virtual text feature of Neovim to display
+error/warning/info/hint information. You can use this option to adjust the
+way these virtual texts are highlighted.
+
+    Type:               |String|
+    Available values:   `'grey'`, `'colored'`, `'highlighted'`
+    Default value:      `'grey'`
+
+Currently, the following plugins are supported:
+
+- Neovim's built-in language server client
+- https://github.com/neoclide/coc.nvim
+- https://github.com/prabirshrestha/vim-lsp
+- https://github.com/dense-analysis/ale
+- https://github.com/neomake/neomake
+- https://github.com/ycm-core/YouCompleteMe
+
+------------------------------------------------------------------------------
+                                               *g:grv_current_word*
+g:grv_current_word~
+
+Some plugins can highlight the word under current cursor, you can use this
+option to control their behavior.
+
+    Type:               |String|
+    Available values:   `'grey background'`, `'high contrast background'`, `'bold'`,
+    `'underline'`, `'italic'`
+    Default value:      `'grey background'` when not in transparent mode, `'bold'`
+    when in transparent mode.
+
+Currently, the following plugins are supported:
+
+- https://github.com/neoclide/coc-highlight
+- https://github.com/dominikduda/vim_current_word
+- https://github.com/RRethy/vim-illuminate
+- https://github.com/itchyny/vim-cursorword
+- https://github.com/prabirshrestha/vim-lsp
+
+------------------------------------------------------------------------------
+                                     *g:grv_inlay_hints_background*
+g:grv_inlay_hints_background~
+
+Inlay hints are special markers that are displayed inline with the code to
+provide you with additional information. You can use this option to customize
+the background color of inlay hints.
+
+    Type:               |String|
+    Available values:   `'none'`, `'dimmed'`
+    Default value:      `'none'`
+
+Currently, the following LSP clients are supported:
+
+- neovim's built-in language server client
+- https://github.com/neoclide/coc.nvim
+- https://github.com/prabirshrestha/vim-lsp
+- https://github.com/ycm-core/YouCompleteMe
+
+------------------------------------------------------------------------------
+                                    *g:grv_disable_terminal_colors*
+g:grv_disable_terminal_colors~
+
+Setting this option to `1` will disable terminal colors provided by this color
+scheme so you can remain terminal colors the same when using |:terminal| in
+vim and outside of vim.
+
+    Type:               |Number|
+    Available values:   `0`, `1`
+    Default value:      `0`
+
+------------------------------------------------------------------------------
+                                           *g:grv_statusline_style*
+g:grv_statusline_style~
+
+Determine the style of statusline/airline/lightline/lualine.
+
+There are 3 designs for statusline:
+
+- `default`: See the screenshots.
+- `mix`: Combines `default` and `original`.
+- `original`: The design used in the original gruvbox.
+
+    Type:               |String|
+    Available values:   `'default'`, `'mix'`, `'original'`
+    Default value:      `'default'`
+
+------------------------------------------------------------------------------
+                                     *g:grv_lightline_disable_bold*
+g:grv_lightline_disable_bold~
+
+By default, bold is enabled in lightline color scheme. To disable bold in
+lightline color scheme, set this option to `1`.
+
+    Type:               |Number|
+    Available values:   `0`, `1`
+    Default value:      `0`
+
+Note: this configuration option doesn't need to be placed before `colorscheme grv`
+
+------------------------------------------------------------------------------
+                                         *g:grv_better_performance*
+g:grv_better_performance~
+
+When enabled, language-specific highlight groups (40+ language modules)
+are skipped, reducing setup time by roughly 50%. Most users won't notice
+the difference, but it can help on low-performance machines.
+
+If you need a specific language's highlights, use `user_highlights` to
+define them selectively.
+
+    Type:               |Number|
+    Available values:   `0`, `1`
+    Default value:      `0`
+
+Note: the initial generation of syntax files, which occurs on the first Vim
+restart after enabling this option, requires up to 5 seconds to complete.
+
+------------------------------------------------------------------------------
+                                            *g:grv_colors_override*
+g:grv_colors_override~
+
+Override color palette. The available keys can be found in
+`/path/to/grv/autoload/grv.vim`.
+
+E.g.
+>
+    let g:grv_colors_override = {'bg0': ['#1d2021', '234'], 'bg2': ['#282828', '235']}
+    colorscheme grv
+<
+    Type:               |Dictionary|
+    Default value:      `{}`
+
+==============================================================================
+FAQ                                                       *grv-faq*
+
+------------------------------------------------------------------------------
+
+The colors don't match those in the screenshots.~
+
+1. This color scheme is mainly designed for true colors, `set termguicolors`
+is required. Check output of `vim --version`, maybe your vim doesn't support
+`termguicolors`.
+
+2. Maybe your terminal emulator doesn't support true colors, you can test it
+using [this script](https://unix.stackexchange.com/questions/404414/print-true-color-24-bit-test-pattern).
+
+3. If you are running vim in tmux, you need to override default true colors of
+tmux, as tmux cannot display true colors properly:
+[#1246 How to use true colors in vim under tmux?](https://github.com/tmux/tmux/issues/1246)
+
+------------------------------------------------------------------------------
+
+The configuration options don't work.~
+
+You should place them before `colorscheme grv` .
+
+------------------------------------------------------------------------------
+
+A lot of errors are detected if I install with pack feature.~
+
+You'll need to add `packadd! grv` before applying this color
+scheme. Check [harunnoir/grv#60](https://github.com/harunnoir/grv/issues/60)
+
+------------------------------------------------------------------------------
+
+I can't apply airline/lightline color scheme.~
+
+The name is `grv` instead of `grv`. I have to use
+underline for some grammatical reasons.
+
+------------------------------------------------------------------------------
+
+How to enable cursive italic keywords?~
+
+1. Install a font that supports cursive italics, for example https://aka.sainnhe.dev/fonts
+
+2. Enable italic keywords in this color scheme: `let g:grv_enable_italic = 1`
+
+3. (Optional) Disable italic comment: `let g:grv_disable_italic_comment = 1`
+
+------------------------------------------------------------------------------
+
+The comment color looks weird.~
+
+Some terminal emulators don't support italics, which may cause the comment
+color looks weird. See https://github.com/harunnoir/grv/issues/5#issuecomment-729586348
+
+A temporary solution is to disable italic comments via
+|g:grv_disable_italic_comment|.
+
+If you are using tmux, you may also need to override default true colors of
+tmux: https://github.com/tmux/tmux/issues/1246
+
+------------------------------------------------------------------------------
+
+How to use custom colors?~
+>
+    function! s:grv_custom() abort
+      " Link a highlight group to a predefined highlight group.
+      " See `colors/grv.vim` for all predefined highlight groups.
+      highlight! link groupA groupB
+      highlight! link groupC groupD
+
+      " Initialize the color palette & define a highlight group.
+      " Uses the Lua bridge — see `lua/grv/` for the module API.
+      let l:palette = grv#get_palette('hard', 'mix', {})
+      call grv#highlight('groupE', l:palette.red, l:palette.none, 'undercurl', l:palette.red)
+    endfunction
+
+    augroup GruvboxMaterialCustom
+      autocmd!
+      autocmd ColorScheme grv call s:grv_custom()
+    augroup END
+
+    colorscheme grv
+<
+Or in Neovim (Lua configuration):
+>
+    vim.api.nvim_create_autocmd('ColorScheme', {
+      group = vim.api.nvim_create_augroup('custom_highlights_gruvboxmaterial', {}),
+      pattern = 'grv',
+      callback = function()
+        local config = require('grv.config').get_config()
+        local palette = require('grv.palette').get_palette(config)
+        local hl = require('grv.util').highlight
+
+        hl('Search', palette.none, palette.bg_visual_yellow)
+        hl('IncSearch', palette.none, palette.bg_visual_red)
+      end
+    })
+<
+Or more conveniently, use `user_highlights` (no autocmd needed):
+>
+    vim.g.grv_user_highlights = {
+      { group = 'Search', fg = 'NONE', bg = palette.bg_visual_yellow },
+      { group = 'IncSearch', fg = 'NONE', bg = palette.bg_visual_red },
+    }
+<
+<
+Note: Make sure to define the `augroup` before declare the `colorscheme`.
+
+------------------------------------------------------------------------------
+
+What's your status line configuration?~
+
+See this post: https://aka.sainnhe.dev/statusline
+
+------------------------------------------------------------------------------
+
+What's the font used here?~
+
+See this post: https://aka.sainnhe.dev/fonts
+
+==============================================================================
+vim:tw=78:nosta:noet:ts=8:sts=0:ft=help:et:sw=4:fen:fdm=marker:fmr={{{,}}}:
