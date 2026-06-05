@@ -17,7 +17,7 @@ end
 local function apply(highlights)
   for group, hl in pairs(highlights) do
     if type(hl) == 'string' then
-      vim.api.nvim_set_hl(0, group, { link = hl, default = true })
+      vim.api.nvim_set_hl(0, group, { link = hl })
     elseif type(hl) == 'table' then
       vim.api.nvim_set_hl(0, group, hl)
     end
@@ -149,7 +149,7 @@ function M.setup(c, opts)
 
   for _, def in ipairs(opts.user_highlights or {}) do
     if def.link then
-      vim.api.nvim_set_hl(0, def.group, { link = def.link, default = true })
+      vim.api.nvim_set_hl(0, def.group, { link = def.link })
     else
       local hl_opts = vim.deepcopy(def)
       hl_opts.group = nil
