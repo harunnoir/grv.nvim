@@ -27,7 +27,6 @@ function M.get(c, opts)
   highlights.MiniIconsPurple = { fg = c.purple[1] }
   highlights.MiniIconsRed = { fg = c.red[1] }
   highlights.MiniIconsYellow = { fg = c.yellow[1] }
-  highlights.MiniIndentscopePrefix = { nocombine = true }
   highlights.MiniJump2dSpot = { fg = c.orange[1], bold = true, nocombine = true }
   highlights.MiniJump2dSpotAhead = { fg = c.aqua[1], nocombine = true }
   highlights.MiniJump2dSpotUnique = { fg = c.yellow[1], bold = true, nocombine = true }
@@ -97,7 +96,8 @@ function M.get(c, opts)
   highlights.MiniDiffSignAdd = 'GreenSign'
   highlights.MiniDiffSignChange = 'BlueSign'
   highlights.MiniDiffSignDelete = 'RedSign'
-  highlights.MiniIndentscopeSymbol = 'Grey'
+  highlights.MiniIndentscopeSymbol = { fg = c.grey1[1], nocombine = true }
+  highlights.MiniIndentscopePrefix = { fg = c.grey1[1], nocombine = true }
   highlights.MiniJump = 'Search'
   highlights.MiniJump2dDim = 'Comment'
   highlights.MiniMapNormal = 'NormalFloat'

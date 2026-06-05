@@ -3,8 +3,10 @@ local M = {}
 function M.get(c, opts)
   local highlights = {}
 
-  highlights.Fg = { fg = c.fg0[1] }
-  highlights.Grey = { fg = c.grey1[1] }
+  highlights.Fg    = { fg = c.fg0[1] }
+  highlights.Grey  = { fg = c.grey0[1] }
+  highlights.Grey1 = { fg = c.grey1[1] }
+  highlights.Grey2 = { fg = c.grey2[1] }
   highlights.Red = { fg = c.red[1] }
   highlights.Orange = { fg = c.orange[1] }
   highlights.Yellow = { fg = c.yellow[1] }
@@ -78,8 +80,8 @@ function M.get(c, opts)
     { 'Boolean', 'Yellow' },
     { 'Class', 'Red' },
     { 'Color', 'Aqua' },
-    { 'Constant', 'Orange' },
-    { 'Constructor', 'Orange' },
+    { 'Constant', 'Purple' },
+    { 'Constructor', 'Yellow' },
     { 'Default', 'Aqua' },
     { 'Enum', 'Yellow' },
     { 'EnumMember', 'Purple' },
@@ -87,13 +89,13 @@ function M.get(c, opts)
     { 'Field', 'Green' },
     { 'File', 'Green' },
     { 'Folder', 'Aqua' },
-    { 'Function', 'Orange' },
+    { 'Function', 'Fg' },
     { 'Interface', 'Yellow' },
     { 'Key', 'Red' },
     { 'Keyword', 'Red' },
-    { 'Method', 'Orange' },
-    { 'Module', 'Yellow' },
-    { 'Namespace', 'Yellow' },
+    { 'Method', 'Fg' },
+    { 'Module', 'YellowItalic' },
+    { 'Namespace', 'YellowItalic' },
     { 'Null', 'Aqua' },
     { 'Number', 'Yellow' },
     { 'Object', 'Aqua' },
@@ -102,13 +104,13 @@ function M.get(c, opts)
     { 'Property', 'Blue' },
     { 'Reference', 'Aqua' },
     { 'Snippet', 'Aqua' },
-    { 'String', 'Yellow' },
+    { 'String', 'Aqua' },
     { 'Struct', 'Yellow' },
     { 'Text', 'Fg' },
     { 'TypeParameter', 'Yellow' },
     { 'Unit', 'Purple' },
     { 'Value', 'Purple' },
-    { 'Variable', 'Blue' },
+    { 'Variable', 'Fg' },
   }
 
   vim.g.grv_lsp_kind_color = lsp_kind_color

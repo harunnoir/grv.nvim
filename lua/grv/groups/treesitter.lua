@@ -17,10 +17,10 @@ function M.get(c, opts)
   highlights.TSCharacterSpecial = 'SpecialChar'
   highlights.TSComment = 'Comment'
   highlights.TSConditional = 'Red'
-  highlights.TSConstBuiltin = 'OrangeItalic'
-  highlights.TSConstMacro = 'RedItalic'
-  highlights.TSConstant = 'Orange'
-  highlights.TSConstructor = 'OrangeBold'
+  highlights.TSConstBuiltin = 'PurpleItalic'
+  highlights.TSConstMacro = 'OrangeItalic'
+  highlights.TSConstant = 'Purple'
+  highlights.TSConstructor = 'Yellow'
   highlights.TSDebug = 'Debug'
   highlights.TSDefine = 'Define'
   highlights.TSEnvironment = 'Macro'
@@ -29,24 +29,24 @@ function M.get(c, opts)
   highlights.TSException = 'Red'
   highlights.TSField = 'Grey'
   highlights.TSFloat = 'Yellow'
-  highlights.TSFuncBuiltin = 'OrangeBold'
-  highlights.TSFuncMacro = 'OrangeBold'
-  highlights.TSFunction = 'Orange'
-  highlights.TSFunctionCall = 'Orange'
+  highlights.TSFuncBuiltin = 'Fg'
+  highlights.TSFuncMacro = 'OrangeItalic'
+  highlights.TSFunction = 'Fg'
+  highlights.TSFunctionCall = 'Fg'
   highlights.TSInclude = 'Red'
-  highlights.TSKeyword = 'Red'
-  highlights.TSKeywordFunction = 'Red'
+  highlights.TSKeyword = 'OrangeItalic'
+  highlights.TSKeywordFunction = 'OrangeItalic'
   highlights.TSKeywordOperator = 'Orange'
-  highlights.TSKeywordReturn = 'Red'
+  highlights.TSKeywordReturn = 'OrangeBold'
   highlights.TSLabel = 'Orange'
-  highlights.TSLiteral = 'String'
+  highlights.TSLiteral = 'Aqua'
   highlights.TSMath = 'Blue'
-  highlights.TSMethod = 'Orange'
-  highlights.TSMethodCall = 'Orange'
+  highlights.TSMethod = 'Fg'
+  highlights.TSMethodCall = 'Fg'
   highlights.TSNamespace = 'YellowItalic'
   highlights.TSNone = 'Fg'
   highlights.TSNumber = 'Yellow'
-  highlights.TSOperator = 'Grey'
+  highlights.TSOperator = 'Grey2'
   highlights.TSParameter = 'Fg'
   highlights.TSParameterReference = 'Fg'
   highlights.TSPreProc = 'PreProc'
@@ -58,9 +58,9 @@ function M.get(c, opts)
   highlights.TSStorageClass = 'Orange'
   highlights.TSStorageClassLifetime = 'Orange'
   highlights.TSStrike = 'Grey'
-  highlights.TSString = 'Yellow'
-  highlights.TSStringEscape = 'Orange'
-  highlights.TSStringRegex = 'Orange'
+  highlights.TSString = 'Aqua'
+  highlights.TSStringEscape = 'AquaItalic'
+  highlights.TSStringRegex = 'AquaItalic'
   highlights.TSStringSpecial = 'SpecialChar'
   highlights.TSSymbol = 'Fg'
   highlights.TSTag = 'Orange'
@@ -70,7 +70,7 @@ function M.get(c, opts)
   highlights.TSTextReference = 'Constant'
   highlights.TSTitle = 'Title'
   highlights.TSTodo = 'Todo'
-  highlights.TSType = 'YellowItalic'
+  highlights.TSType = 'Yellow'
   highlights.TSTypeBuiltin = 'YellowItalic'
   highlights.TSTypeDefinition = 'YellowItalic'
   highlights.TSTypeQualifier = 'Orange'
@@ -120,7 +120,7 @@ function M.get(c, opts)
   highlights['@keyword.import'] = 'TSInclude'
   highlights['@keyword.operator'] = 'TSKeywordOperator'
   highlights['@keyword.repeat'] = 'TSRepeat'
-  highlights['@keyword.return'] = 'TSKeywordReturn'
+  highlights['@keyword.return'] = { fg = c.orange[1], bold = true, italic = opts.enable_italic }
   highlights['@keyword.storage'] = 'TSStorageClass'
   highlights['@label'] = 'TSLabel'
   highlights['@markup.emphasis'] = 'TSEmphasis'
@@ -153,15 +153,15 @@ function M.get(c, opts)
   highlights['@parameter.reference'] = 'TSParameterReference'
   highlights['@preproc'] = 'TSPreProc'
   highlights['@property'] = 'TSProperty'
-  highlights['@punctuation.bracket'] = { fg = c.grey1[1] }
-  highlights['@punctuation.delimiter'] = { fg = c.grey1[1] }
-  highlights['@punctuation.special'] = { fg = c.grey2[1] }
+  highlights['@punctuation.bracket'] = { fg = c.grey0[1] }
+  highlights['@punctuation.delimiter'] = { fg = c.grey0[1] }
+  highlights['@punctuation.special'] = { fg = c.grey0[1] }
   highlights['@repeat'] = 'TSRepeat'
   highlights['@storageclass'] = 'TSStorageClass'
   highlights['@storageclass.lifetime'] = 'TSStorageClassLifetime'
   highlights['@strike'] = 'TSStrike'
-  highlights['@string'] = 'TSString'
-  highlights['@string.escape'] = 'TSStringEscape'
+  highlights['@string'] = { fg = c.aqua[1] }
+  highlights['@string.escape'] = { fg = c.aqua[1] }
   highlights['@string.regex'] = 'TSStringRegex'
   highlights['@string.regexp'] = 'TSStringRegex'
   highlights['@string.special'] = 'TSStringSpecial'
@@ -197,7 +197,7 @@ function M.get(c, opts)
   highlights['@type.definition'] = 'TSTypeDefinition'
   highlights['@type.qualifier'] = 'TSTypeQualifier'
   highlights['@uri'] = 'TSURI'
-  highlights['@variable'] = { fg = c.fg1[1] }
+  highlights['@variable'] = { fg = c.fg0[1] }
   highlights['@variable.builtin'] = 'TSVariableBuiltin'
   highlights['@variable.member'] = { fg = c.grey2[1] }
   highlights['@variable.parameter'] = 'TSParameter'
@@ -234,7 +234,7 @@ function M.get(c, opts)
   highlights['@variable.parameter']        = { fg = c.fg1[1], italic = opts.enable_italic }
   highlights['@lsp.type.parameter']        = { fg = c.fg1[1], italic = opts.enable_italic }
   highlights['@lsp.type.parameter.lua']    = { fg = c.fg1[1], italic = opts.enable_italic }
-  highlights['@lsp.type.parameter.python'] = { fg = c.fg0[1], italic = true }
+  highlights['@lsp.type.parameter.python'] = { fg = c.grey2[1], italic = true }
 
   return highlights
 end

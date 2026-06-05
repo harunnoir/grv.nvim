@@ -17,7 +17,7 @@ function M.get(c, opts)
     else
       highlights.FoldColumn = { fg = c.grey0[1], bg = 'NONE' }
     end
-    highlights.Folded = { fg = c.grey1[1], bg = 'NONE' }
+    highlights.Folded = { fg = c.grey1[1], bg = c.bg1[1], italic = true }
     highlights.SignColumn = { fg = c.fg0[1], bg = 'NONE' }
     highlights.ToolbarLine = { fg = c.fg0[1], bg = 'NONE' }
   else
@@ -33,7 +33,7 @@ function M.get(c, opts)
     else
       highlights.EndOfBuffer = { fg = c.bg0[1], bg = 'NONE' }
     end
-    highlights.Folded = { fg = c.grey1[1], bg = c.bg2[1] }
+    highlights.Folded = { fg = c.grey1[1], bg = c.bg1[1], italic = true }
     highlights.ToolbarLine = { fg = c.fg1[1], bg = c.bg3[1] }
     if opts.sign_column_background == 'grey' or opts.sign_column_background == 'linenr' then
       highlights.SignColumn = { fg = c.fg0[1], bg = c.bg2[1] }
@@ -48,9 +48,9 @@ function M.get(c, opts)
     end
   end
 
-  highlights.IncSearch = { fg = c.bg0[1], bg = c.bg_red[1] }
-  highlights.Search = { fg = c.bg0[1], bg = c.bg_green[1] }
-  highlights.CurSearch = 'IncSearch'
+  highlights.IncSearch = { fg = c.bg0[1], bg = c.orange[1], bold = true }
+  highlights.Search    = { fg = c.bg0[1], bg = c.yellow[1] }
+  highlights.CurSearch = { fg = c.bg0[1], bg = c.orange[1], bold = true }
 
   highlights.ColorColumn = { bg = c.bg2[1] }
   if opts.ui_contrast == 'low' then
@@ -80,48 +80,48 @@ function M.get(c, opts)
     if opts.sign_column_background == 'linenr' and opts.transparent_background == 0 then
       highlights.LineNr = { fg = c.bg5[1], bg = c.bg1[1] }
       if vim.wo.diff then
-        highlights.CursorLineNr = { fg = c.grey1[1], bg = c.bg1[1], underline = true }
+        highlights.CursorLineNr = { fg = c.yellow[1], bg = c.bg1[1], underline = true }
       elseif vim.wo.relativenumber and not vim.wo.cursorline then
-        highlights.CursorLineNr = { fg = c.grey1[1] }
+        highlights.CursorLineNr = { fg = c.yellow[1], bg = c.bg1[1], bold = true }
       else
-        highlights.CursorLineNr = { fg = c.grey1[1], bg = c.bg1[1] }
+        highlights.CursorLineNr = { fg = c.yellow[1], bg = c.bg1[1], bold = true }
       end
     else
       highlights.LineNr = { fg = c.bg5[1] }
       if vim.wo.diff then
-        highlights.CursorLineNr = { fg = c.grey1[1], underline = true }
+        highlights.CursorLineNr = { fg = c.yellow[1], bg = c.bg1[1], underline = true }
       elseif (vim.wo.relativenumber and not vim.wo.cursorline) or opts.sign_column_background == 'none' then
-        highlights.CursorLineNr = { fg = c.grey1[1] }
+        highlights.CursorLineNr = { fg = c.yellow[1], bg = c.bg1[1], bold = true }
       else
-        highlights.CursorLineNr = { fg = c.grey1[1], bg = c.bg1[1] }
+        highlights.CursorLineNr = { fg = c.yellow[1], bg = c.bg1[1], bold = true }
       end
     end
   else
     if opts.sign_column_background == 'linenr' and opts.transparent_background == 0 then
-      highlights.LineNr = { fg = c.grey0[1], bg = c.bg1[1] }
+      highlights.LineNr = { fg = c.bg5[1], bg = c.bg1[1] }
       if vim.wo.diff then
-        highlights.CursorLineNr = { fg = c.grey2[1], underline = true }
+        highlights.CursorLineNr = { fg = c.yellow[1], bg = c.bg1[1], underline = true }
       elseif vim.wo.relativenumber and not vim.wo.cursorline then
-        highlights.CursorLineNr = { fg = c.grey2[1] }
+        highlights.CursorLineNr = { fg = c.yellow[1], bg = c.bg1[1], bold = true }
       else
-        highlights.CursorLineNr = { fg = c.grey2[1], bg = c.bg1[1] }
+        highlights.CursorLineNr = { fg = c.yellow[1], bg = c.bg1[1], bold = true }
       end
     else
-      highlights.LineNr = { fg = c.grey0[1] }
+      highlights.LineNr = { fg = c.bg5[1] }
       if vim.wo.diff then
-        highlights.CursorLineNr = { fg = c.grey2[1], underline = true }
+        highlights.CursorLineNr = { fg = c.yellow[1], bg = c.bg1[1], underline = true }
       elseif (vim.wo.relativenumber and not vim.wo.cursorline) or opts.sign_column_background == 'none' then
-        highlights.CursorLineNr = { fg = c.grey2[1] }
+        highlights.CursorLineNr = { fg = c.yellow[1], bg = c.bg1[1], bold = true }
       else
-        highlights.CursorLineNr = { fg = c.grey2[1], bg = c.bg1[1] }
+        highlights.CursorLineNr = { fg = c.yellow[1], bg = c.bg1[1], bold = true }
       end
     end
   end
 
-  highlights.DiffAdd = { bg = c.bg_diff_green[1] }
+  highlights.DiffAdd    = { bg = c.bg_diff_green[1] }
   highlights.DiffChange = { bg = c.bg_diff_blue[1] }
-  highlights.DiffDelete = { bg = c.bg_diff_red[1] }
-  highlights.DiffText = { fg = c.bg0[1], bg = c.blue[1] }
+  highlights.DiffDelete = { fg = c.grey0[1], bg = c.bg_diff_red[1] }
+  highlights.DiffText   = { bg = c.bg1[1] }
 
   highlights.Directory = { fg = c.green[1] }
   highlights.ErrorMsg = { fg = c.red[1], bold = true, underline = true }
@@ -129,7 +129,7 @@ function M.get(c, opts)
   highlights.ModeMsg = { fg = c.fg0[1], bold = true }
   highlights.MoreMsg = { fg = c.yellow[1], bold = true }
   highlights.MsgArea = 'Normal'
-  highlights.MatchParen = { bg = c.bg4[1] }
+  highlights.MatchParen = { fg = c.orange[1], bold = true }
   highlights.NonText = { fg = c.bg5[1] }
   highlights.Whitespace = { fg = c.bg5[1] }
   highlights.SpecialKey = { fg = c.orange[1] }
@@ -156,10 +156,10 @@ function M.get(c, opts)
 
   highlights.Question = { fg = c.yellow[1] }
 
-  highlights.SpellBad = { sp = c.red[1], undercurl = true }
-  highlights.SpellCap = { sp = c.blue[1], undercurl = true }
-  highlights.SpellLocal = { sp = c.aqua[1], undercurl = true }
-  highlights.SpellRare = { sp = c.purple[1], undercurl = true }
+  highlights.SpellBad = { sp = c.red[1], underline = true }
+  highlights.SpellCap = { sp = c.blue[1], underline = true }
+  highlights.SpellLocal = { sp = c.aqua[1], underline = true }
+  highlights.SpellRare = { sp = c.purple[1], underline = true }
 
   if opts.transparent_background == 2 then
     if opts.statusline_style == 'original' then
@@ -236,8 +236,8 @@ function M.get(c, opts)
   highlights.StatusColumn = 'WinBarNC'
 
   if opts.visual == 'grey background' then
-    highlights.Visual = { bg = c.bg3[1] }
-    highlights.VisualNOS = { bg = c.bg3[1] }
+    highlights.Visual = { bg = c.bg1[1] }
+    highlights.VisualNOS = { bg = c.bg1[1] }
   elseif opts.visual == 'green background' then
     highlights.Visual = { bg = c.bg_visual_green[1] }
     highlights.VisualNOS = { bg = c.bg_visual_green[1] }
@@ -252,7 +252,11 @@ function M.get(c, opts)
     highlights.VisualNOS = { reverse = true }
   end
 
-  highlights.QuickFixLine = { fg = c.purple[1], bold = true }
+  highlights.QuickFixLine = { fg = c.bg0[1], bg = c.yellow[1], bold = true }
+  -- qf text uses darker fg so it's readable against soft bg
+  highlights.qfFileName   = { fg = c.orange[1] }
+  highlights.qfLineNr     = { fg = c.grey1[1] }
+  highlights.qfError      = { fg = c.red[1] }
   highlights.Debug = { fg = c.orange[1] }
   highlights.debugPC = { fg = c.bg0[1], bg = c.green[1] }
   highlights.debugBreakpoint = { fg = c.bg0[1], bg = c.red[1] }
@@ -262,26 +266,26 @@ function M.get(c, opts)
   -- Diagnostics
   if opts.diagnostic_text_highlight then
     highlights.DiagnosticError = { fg = c.red[1], bg = c.bg_visual_red[1] }
-    highlights.DiagnosticUnderlineError = { sp = c.red[1], bg = c.bg_visual_red[1], undercurl = true }
-    highlights.DiagnosticWarn = { fg = c.yellow[1], bg = c.bg_visual_yellow[1] }
-    highlights.DiagnosticUnderlineWarn = { sp = c.yellow[1], bg = c.bg_visual_yellow[1], undercurl = true }
+    highlights.DiagnosticUnderlineError = { sp = c.red[1], underline = true }
+    highlights.DiagnosticWarn = { fg = c.yellow[1], bg = c.bg1[1] }
+    highlights.DiagnosticUnderlineWarn = { sp = c.yellow[1], underline = true }
     highlights.DiagnosticInfo = { fg = c.blue[1], bg = c.bg_visual_blue[1] }
-    highlights.DiagnosticUnderlineInfo = { sp = c.blue[1], bg = c.bg_visual_blue[1], undercurl = true }
+    highlights.DiagnosticUnderlineInfo = { sp = c.blue[1], underline = true }
     highlights.DiagnosticHint = { fg = c.purple[1], bg = c.bg_visual_purple[1] }
-    highlights.DiagnosticUnderlineHint = { sp = c.purple[1], bg = c.bg_visual_purple[1], undercurl = true }
+    highlights.DiagnosticUnderlineHint = { sp = c.purple[1], underline = true }
     highlights.DiagnosticOk = { fg = c.green[1], bg = c.bg_visual_green[1] }
-    highlights.DiagnosticUnderlineOk = { sp = c.green[1], bg = c.bg_visual_green[1], undercurl = true }
+    highlights.DiagnosticUnderlineOk = { sp = c.green[1], underline = true }
   else
     highlights.DiagnosticError = { fg = c.red[1] }
-    highlights.DiagnosticUnderlineError = { sp = c.red[1], undercurl = true }
+    highlights.DiagnosticUnderlineError = { sp = c.red[1], underline = true }
     highlights.DiagnosticWarn = { fg = c.yellow[1] }
-    highlights.DiagnosticUnderlineWarn = { sp = c.yellow[1], undercurl = true }
+    highlights.DiagnosticUnderlineWarn = { sp = c.yellow[1], underline = true }
     highlights.DiagnosticInfo = { fg = c.blue[1] }
-    highlights.DiagnosticUnderlineInfo = { sp = c.blue[1], undercurl = true }
+    highlights.DiagnosticUnderlineInfo = { sp = c.blue[1], underline = true }
     highlights.DiagnosticHint = { fg = c.purple[1] }
-    highlights.DiagnosticUnderlineHint = { sp = c.purple[1], undercurl = true }
+    highlights.DiagnosticUnderlineHint = { sp = c.purple[1], underline = true }
     highlights.DiagnosticOk = { fg = c.green[1] }
-    highlights.DiagnosticUnderlineOk = { sp = c.green[1], undercurl = true }
+    highlights.DiagnosticUnderlineOk = { sp = c.green[1], underline = true }
   end
   highlights.DiagnosticFloatingError = 'ErrorFloat'
   highlights.DiagnosticFloatingWarn = 'WarningFloat'
@@ -339,20 +343,20 @@ function M.get(c, opts)
   highlights.DiagnosticDeprecated = { strikethrough = true, sp = c.fg0[1] }
 
   if opts.diagnostic_text_highlight then
-    highlights.ErrorText = { sp = c.red[1], bg = c.bg_visual_red[1], undercurl = true }
-    highlights.WarningText = { sp = c.yellow[1], bg = c.bg_visual_yellow[1], undercurl = true }
-    highlights.InfoText = { sp = c.blue[1], bg = c.bg_visual_blue[1], undercurl = true }
-    highlights.HintText = { sp = c.purple[1], bg = c.bg_visual_purple[1], undercurl = true }
+    highlights.ErrorText = { sp = c.red[1], underline = true }
+    highlights.WarningText = { sp = c.yellow[1], underline = true }
+    highlights.InfoText = { sp = c.blue[1], underline = true }
+    highlights.HintText = { sp = c.purple[1], underline = true }
   else
-    highlights.ErrorText = { sp = c.red[1], undercurl = true }
-    highlights.WarningText = { sp = c.yellow[1], undercurl = true }
-    highlights.InfoText = { sp = c.blue[1], undercurl = true }
-    highlights.HintText = { sp = c.purple[1], undercurl = true }
+    highlights.ErrorText = { sp = c.red[1], underline = true }
+    highlights.WarningText = { sp = c.yellow[1], underline = true }
+    highlights.InfoText = { sp = c.blue[1], underline = true }
+    highlights.HintText = { sp = c.purple[1], underline = true }
   end
 
   if opts.diagnostic_line_highlight then
     highlights.ErrorLine = { bg = c.bg_visual_red[1] }
-    highlights.WarningLine = { bg = c.bg_visual_yellow[1] }
+    highlights.WarningLine = { bg = c.bg1[1] }
     highlights.InfoLine = { bg = c.bg_visual_blue[1] }
     highlights.HintLine = { bg = c.bg_visual_purple[1] }
   end
@@ -370,7 +374,7 @@ function M.get(c, opts)
     highlights.VirtualTextHint = 'Purple'
     highlights.VirtualTextOk = 'Green'
   else
-    highlights.VirtualTextWarning = { fg = c.yellow[1], bg = c.bg_visual_yellow[1] }
+    highlights.VirtualTextWarning = { fg = c.yellow[1], bg = c.bg1[1] }
     highlights.VirtualTextError = { fg = c.red[1], bg = c.bg_visual_red[1] }
     highlights.VirtualTextInfo = { fg = c.blue[1], bg = c.bg_visual_blue[1] }
     highlights.VirtualTextHint = { fg = c.purple[1], bg = c.bg_visual_purple[1] }

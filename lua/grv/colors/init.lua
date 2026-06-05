@@ -38,15 +38,15 @@ function M.setup(config)
   }
 
   c.syntax = {
-    keyword      = palette.red,
-    string       = palette.yellow,
+    keyword      = palette.orange,
+    string       = palette.aqua,
     number       = palette.yellow,
-    ['function'] = palette.orange,
+    ['function'] = palette.fg1,
     type         = palette.yellow,
-    comment      = palette.grey0,
-    variable     = palette.fg1,
-    operator     = palette.grey2,
-    preproc      = palette.red,
+    comment      = palette.bg5,
+    variable     = palette.fg0,
+    operator     = palette.grey1,
+    preproc      = palette.orange,
   }
 
   return c

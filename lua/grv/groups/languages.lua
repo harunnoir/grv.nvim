@@ -240,7 +240,7 @@ function M.get(c, opts)
 
   -- css
   highlights.cssAttrComma = 'Fg'
-  highlights.cssBraces = 'Fg'
+  highlights.cssBraces = 'Grey'
   highlights.cssTagName = 'PurpleItalic'
   highlights.cssClassNameDot = 'Red'
   highlights.cssClassName = 'RedItalic'
@@ -303,8 +303,8 @@ function M.get(c, opts)
   -- javascript
   highlights.javaScriptNull = 'Aqua'
   highlights.javaScriptIdentifier = 'Orange'
-  highlights.javaScriptParens = 'Fg'
-  highlights.javaScriptBraces = 'Fg'
+  highlights.javaScriptParens = 'Grey'
+  highlights.javaScriptBraces = 'Grey'
   highlights.javaScriptGlobal = 'Purple'
   highlights.javaScriptMessage = 'Yellow'
   highlights.javaScriptFunction = 'RedItalic'
@@ -356,7 +356,7 @@ function M.get(c, opts)
   highlights.typescriptVariable = 'Orange'
   highlights.typescriptVariableDeclaration = 'Blue'
   highlights.typescriptTypeReference = 'Yellow'
-  highlights.typescriptBraces = 'Fg'
+  highlights.typescriptBraces = 'Grey'
   highlights.typescriptEnumKeyword = 'RedItalic'
   highlights.typescriptEnum = 'Yellow'
   highlights.typescriptIdentifierName = 'Aqua'
@@ -419,9 +419,9 @@ function M.get(c, opts)
   highlights.coffeeExtendedOp = 'Orange'
   highlights.coffeeSpecialOp = 'Fg'
   highlights.coffeeDotAccess = 'Grey'
-  highlights.coffeeCurly = 'Fg'
-  highlights.coffeeParen = 'Fg'
-  highlights.coffeeBracket = 'Fg'
+  highlights.coffeeCurly = 'Grey'
+  highlights.coffeeParen = 'Grey'
+  highlights.coffeeBracket = 'Grey'
   highlights.coffeeOperator = 'RedItalic'
   highlights.coffeeStatement = 'Orange'
   highlights.coffeeSpecialIdent = 'Purple'
@@ -512,7 +512,7 @@ function M.get(c, opts)
   highlights.luaFuncCall = 'GreenBold'
   highlights.luaLocal = 'Orange'
   highlights.luaSpecialValue = 'GreenBold'
-  highlights.luaBraces = 'Fg'
+  highlights.luaBraces = 'Grey'
   highlights.luaBuiltIn = 'Purple'
   highlights.luaNoise = 'Grey'
   highlights.luaLabel = 'Purple'
@@ -613,7 +613,7 @@ function M.get(c, opts)
   highlights.phpComparison = 'Orange'
   highlights.phpMethodsVar = 'Aqua'
   highlights.phpMemberSelector = 'Green'
-  highlights.phpParent = 'Fg'
+  highlights.phpParent = 'Grey'
   highlights.phpNowDoc = 'Green'
   highlights.phpFunction = 'GreenBold'
   highlights.phpMethod = 'GreenBold'
@@ -780,6 +780,12 @@ function M.get(c, opts)
   highlights.vimSynType = 'Orange'
   highlights.vimHiBang = 'Orange'
   highlights.vimSet = 'Yellow'
+  -- vim brackets/parens/separators → grey0 to match treesitter punctuation
+  highlights.vimParenSep    = { fg = c.grey0[1] }
+  highlights.vimSep         = { fg = c.grey0[1] }
+  highlights.vimOperParen   = { fg = c.grey0[1] }
+  highlights.vimBracket     = { fg = c.grey0[1] }
+  highlights.vimCurly       = { fg = c.grey0[1] }
 
   -- make
   highlights.makeIdent = 'Aqua'
@@ -827,7 +833,7 @@ function M.get(c, opts)
   -- json
   highlights.jsonKeyword = 'Orange'
   highlights.jsonQuote = 'Grey'
-  highlights.jsonBraces = 'Fg'
+  highlights.jsonBraces = 'Grey'
 
   -- yaml
   highlights.yamlKey = 'Orange'
